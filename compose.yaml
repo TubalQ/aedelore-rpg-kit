@@ -1,0 +1,91 @@
+# Aedelore RPG Kit - one-command self-host.
+#
+#   1. cp .env.example .env   (then edit .env: set a DB password + AUTH_SECRET)
+#   2. docker compose up -d   (or: podman-compose up -d)
+#   3. open http://localhost:3002
+#
+# On first start the `init` service creates the database schema and seeds the
+# active system's wiki (src/systems/$NEXT_PUBLIC_ACTIVE_SYSTEM/content/wiki.json).
+# The MCP server is optional: `docker compose --profile mcp up -d`.
+
+name: aedelore-rpg-kit
+
+services:
+  db:
+    image: docker.io/library/postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-rpgkit}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+      POSTGRES_DB: ${POSTGRES_DB:-rpgkit}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-rpgkit} -d ${POSTGRES_DB:-rpgkit}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+  # One-shot: apply versioned migrations (drizzle-kit migrate - creates every
+  # table incl. the generated wiki search_vector column) and seed the active
+  # system's wiki. Runs to completion, then exits. Safe to re-run - every step
+  # is idempotent (migrate skips already-applied migrations via the drizzle
+  # bookkeeping table). The MCP server reads game data live from the app's
+  # /api/game-data endpoint, so there is no export step.
+  init:
+    build:
+      context: .
+      dockerfile: Containerfile.app
+    image: aedelore-rpg-kit-app:latest
+    env_file: .env
+    depends_on:
+      db:
+        condition: service_healthy
+    entrypoint: ["sh", "-c", "npm run db:migrate && npm run db:seed"]
+    restart: "no"
+
+  app:
+    build:
+      context: .
+      dockerfile: Containerfile.app
+    image: aedelore-rpg-kit-app:latest
+    env_file: .env
+    ports:
+      - "${APP_PORT:-3002}:3002"
+    volumes:
+      # User-uploaded media (wiki images, book covers, avatars) persists here.
+      - uploads:/app/public/uploads:z
+    depends_on:
+      db:
+        condition: service_healthy
+      init:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3002/').then(r=>process.exit(r.status<500?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+    restart: unless-stopped
+
+  # Optional AI assistant server. Requires OIDC (see .env). Enable with:
+  #   docker compose --profile mcp up -d
+  mcp:
+    profiles: ["mcp"]
+    build:
+      context: ./mcp
+    image: aedelore-rpg-kit-mcp:latest
+    env_file: .env
+    environment:
+      # Reach the app service by name for all API calls incl. live game data.
+      API_URL: http://app:3002
+    ports:
+      - "${MCP_PORT:-3100}:3100"
+    depends_on:
+      app:
+        condition: service_started
+    restart: unless-stopped
+
+volumes:
+  db-data:
+  uploads:

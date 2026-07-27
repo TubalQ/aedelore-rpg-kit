@@ -1,0 +1,64 @@
+{
+  "weapons": [
+    {
+      "name": "Sword",
+      "type": "Martial Melee",
+      "subtype": "Martial Melee",
+      "ability": "Strength",
+      "bonus": "+0",
+      "damage": "1d8",
+      "range": "1",
+      "break": 5
+    },
+    {
+      "name": "Dagger",
+      "type": "Simple Melee",
+      "subtype": "Simple Melee",
+      "ability": "Dexterity",
+      "bonus": "+0",
+      "damage": "1d4",
+      "range": "1",
+      "break": 4
+    },
+    {
+      "name": "Bow",
+      "type": "Ranged",
+      "subtype": "Ranged",
+      "ability": "Dexterity",
+      "bonus": "+0",
+      "damage": "1d6",
+      "range": "20/40",
+      "break": 3
+    },
+    {
+      "name": "Staff",
+      "type": "Simple Melee",
+      "subtype": "Simple Melee",
+      "ability": "Strength",
+      "bonus": "+0",
+      "damage": "1d6",
+      "range": "1",
+      "break": 4
+    }
+  ],
+  "ammunition": [
+    {
+      "name": "Arrows (20)",
+      "cost": "1 gold"
+    }
+  ],
+  "categories": [
+    "Simple Melee",
+    "Martial Melee",
+    "Ranged"
+  ],
+  "subtypes": [
+    "Simple Melee",
+    "Martial Melee",
+    "Ranged"
+  ],
+  "abilities": [
+    "Strength",
+    "Dexterity"
+  ]
+}

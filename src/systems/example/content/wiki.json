@@ -1,0 +1,26 @@
+{
+  "books": [
+    {
+      "slug": "getting-started",
+      "title": "Getting Started",
+      "description": "Welcome to your game. Edit these pages to make it yours.",
+      "sortOrder": 0,
+      "pages": [
+        {
+          "slug": "welcome",
+          "title": "Welcome",
+          "summary": "Start here.",
+          "sortOrder": 0,
+          "content": "<p>This is the starter wiki for a game built on the platform shell. Its content lives in <code>systems/&lt;your-system&gt;/content/wiki.json</code> and is loaded into the database by <code>scripts/seed-wiki.ts</code>.</p><p>Replace this book with your own world's lore, rules and locations.</p>"
+        },
+        {
+          "slug": "how-content-works",
+          "title": "How Content Works",
+          "summary": "Where wiki content comes from.",
+          "sortOrder": 1,
+          "content": "<p>Add books, chapters and pages to <code>content/wiki.json</code>, then run <code>NEXT_PUBLIC_ACTIVE_SYSTEM=&lt;system&gt; npx tsx scripts/seed-wiki.ts</code> against a fresh database (idempotent - existing slugs are skipped). You can also author content directly in the in-app wiki admin.</p>"
+        }
+      ]
+    }
+  ]
+}

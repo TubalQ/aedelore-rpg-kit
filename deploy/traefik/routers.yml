@@ -1,0 +1,44 @@
+################################################################
+# Reverse-proxy (Traefik file provider) template.
+# Backends run on the app VM. Replace <your-domain> and the backend
+# host/IP with your own values.
+#
+#   <your-domain>              -> app (Next.js)   http://<app-vm>:3002   (catch-all, prio 1)
+#   <your-domain>/mcp*         -> MCP server      http://<app-vm>:3100   (path-split, prio 100)
+#   <your-domain>/.well-known/oauth-*  -> MCP     (OAuth metadata for the connector)
+#
+# The MCP router MUST have higher priority than the app catch-all, otherwise the
+# app swallows /mcp and the OAuth metadata. Point your OIDC client's callback at
+# https://<your-domain>/mcp/oauth/oidc-callback.
+################################################################
+
+http:
+  routers:
+    aedelore-mcp:
+      rule: "Host(`<your-domain>`) && (PathPrefix(`/mcp`) || PathPrefix(`/.well-known/oauth-protected-resource`) || PathPrefix(`/.well-known/oauth-authorization-server`))"
+      entryPoints: [websecure]
+      service: app-mcp-svc
+      middlewares: [rate-general, security-headers]
+      tls:
+        certResolver: letsencrypt
+      priority: 100
+
+    app-web:
+      rule: "Host(`<your-domain>`)"
+      entryPoints: [websecure]
+      service: app-web-svc
+      middlewares: [rate-general, security-headers]
+      tls:
+        certResolver: letsencrypt
+      priority: 1
+
+  services:
+    app-web-svc:
+      loadBalancer:
+        servers:
+          - url: "http://<app-vm>:3002"
+
+    app-mcp-svc:
+      loadBalancer:
+        servers:
+          - url: "http://<app-vm>:3100"

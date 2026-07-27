@@ -1,0 +1,56 @@
+{
+  "brandLetter": "E",
+  "footer": "Example Fantasy - your world, your rules",
+  "sideNav": [
+    { "href": "#world", "label": "The World", "icon": "Map" },
+    { "href": "#ages", "label": "History", "icon": "Scroll" },
+    { "href": "#races", "label": "Races", "icon": "Users" },
+    { "href": "#classes", "label": "Classes", "icon": "Swords" },
+    { "href": "/wiki", "label": "Wiki", "icon": "BookOpen" }
+  ],
+  "hero": {
+    "ctaPrimary": { "label": "Enter the world", "href": "/login" },
+    "ctaSecondary": { "label": "Explore the wiki", "href": "/wiki" },
+    "scrollHint": "Scroll ↓"
+  },
+  "world": {
+    "chapter": "Chapter I",
+    "heading": "The World",
+    "verses": [
+      { "num": "I", "text": "Describe your world here. Edit this text in the game-system editor - it is stored in the database, no code changes needed." },
+      { "num": "II", "text": "Add as many verses as you like. Each one becomes a numbered paragraph on the landing page." }
+    ]
+  },
+  "cinematic": {
+    "image": "",
+    "quote": "A short, evocative line about your setting.",
+    "label": "A place in your world"
+  },
+  "ages": {
+    "chapter": "Chapter II",
+    "heading": "History",
+    "verses": [
+      { "num": "I", "text": "Sketch the history of your world across a few short verses." }
+    ]
+  },
+  "races": {
+    "chapter": "Chapter III",
+    "heading": "Races",
+    "wikiBook": "races-and-classes",
+    "items": [
+      { "name": "Humans", "desc": "Versatile and adaptable." },
+      { "name": "Elves", "desc": "Graceful and long-lived." },
+      { "name": "Dwarves", "desc": "Sturdy mountain folk." }
+    ]
+  },
+  "classes": {
+    "chapter": "Chapter IV",
+    "heading": "Classes",
+    "wikiBook": "races-and-classes",
+    "items": [
+      { "name": "Warrior", "slug": "warrior", "desc": "Master of arms." },
+      { "name": "Mage", "slug": "mage", "desc": "Wielder of the arcane." },
+      { "name": "Rogue", "slug": "rogue", "desc": "Shadow and guile." }
+    ]
+  }
+}

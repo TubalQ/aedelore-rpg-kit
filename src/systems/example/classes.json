@@ -1,0 +1,23 @@
+{
+  "names": ["Fighter", "Wizard"],
+  "data": {
+    "Fighter": {
+      "name": "Fighter",
+      "bonuses": ["+2 Athletics", "+1 Strength"],
+      "startingEquipment": { "armor": { "chest": "Chainmail" }, "shield": "Shield (Wooden)", "weapon": "Sword", "gold": 5, "worthiness": 3, "abilities": 3, "hpBonus": 5 },
+      "abilityType": "weakened",
+      "arcanaMax": 0,
+      "arcanaStart": 0,
+      "spellSlots": 0
+    },
+    "Wizard": {
+      "name": "Wizard",
+      "bonuses": ["+2 Arcana", "+1 History"],
+      "startingEquipment": { "armor": { "chest": "Cloth" }, "weapon": "Staff", "gold": 8, "worthiness": 4, "arcana": "1D10", "spells": 8, "hpBonus": 2 },
+      "abilityType": "arcana",
+      "arcanaMax": 20,
+      "arcanaStart": 10,
+      "spellSlots": 8
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "armor": [
+    {
+      "name": "Cloth",
+      "bodypart": "chest",
+      "type": "Cloth",
+      "hp": 4,
+      "ac": 0,
+      "disadvantage": null
+    },
+    {
+      "name": "Leather",
+      "bodypart": "chest",
+      "type": "Light",
+      "hp": 8,
+      "ac": 1,
+      "disadvantage": null
+    },
+    {
+      "name": "Chainmail",
+      "bodypart": "chest",
+      "type": "Heavy",
+      "hp": 16,
+      "ac": 3,
+      "disadvantage": "-1 Stealth"
+    }
+  ],
+  "shields": [
+    {
+      "name": "Shield",
+      "hp": 10,
+      "ac": 2,
+      "damage": "1d4",
+      "disadvantage": null
+    }
+  ],
+  "baseAc": 10,
+  "bodyParts": [
+    "head",
+    "chest",
+    "legs"
+  ],
+  "weights": [
+    "Cloth",
+    "Light",
+    "Medium",
+    "Heavy"
+  ]
+}

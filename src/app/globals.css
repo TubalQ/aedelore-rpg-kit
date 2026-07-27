@@ -1,0 +1,245 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-base: #0a0a0f;
+  --color-bg-surface: #12121a;
+  --color-bg-elevated: #1a1a25;
+  --color-bg-overlay: #22222f;
+
+  --color-text-base: #e8e6e3;
+  --color-text-muted: #9b9a97;
+  --color-text-faint: #5c5c5c;
+
+  --color-accent-gold: #c9a84c;
+  --color-accent-gold-dim: #8b7534;
+  --color-accent-purple: #7c5cbf;
+  --color-accent-blue: #4a90d9;
+  --color-accent-green: #4caf50;
+  --color-accent-cyan: #4dd0e1;
+  --color-accent-red: #e74c3c;
+
+  --color-border: #2a2a35;
+  --color-border-hover: #3a3a48;
+
+  --font-display: "Crimson Text", Georgia, serif;
+  --font-body: "Inter", system-ui, sans-serif;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg-base);
+  color: var(--color-text-base);
+}
+
+::selection {
+  background-color: var(--color-accent-purple);
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-base);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-hover);
+}
+
+.wiki-content {
+  max-width: 72ch;
+}
+
+.wiki-content h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--color-text-base);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.5rem;
+}
+
+.wiki-content h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--color-text-base);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.wiki-content p {
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.wiki-content strong {
+  color: var(--color-text-base);
+}
+
+.wiki-content a {
+  color: var(--color-accent-gold);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.wiki-content a:hover {
+  color: var(--color-accent-gold-dim);
+}
+
+.wiki-content ul, .wiki-content ol {
+  color: var(--color-text-muted);
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.wiki-content li {
+  margin-bottom: 0.25rem;
+}
+
+.wiki-content hr {
+  border-color: var(--color-border);
+  margin: 1.5rem 0;
+}
+
+.wiki-content blockquote {
+  border-left: 3px solid var(--color-accent-gold-dim);
+  padding-left: 1rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin: 1rem 0;
+}
+
+.wiki-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  /* Redaktörer kan skapa godtyckligt breda tabeller (statblocks m.m.) -
+     scrolla tabellen i sig i stället för att tvinga sid-scroll på mobil. */
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.wiki-content th, .wiki-content td {
+  border: 1px solid var(--color-border);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.wiki-content th {
+  background: var(--color-bg-elevated);
+  color: var(--color-text-base);
+}
+
+.wiki-content td {
+  color: var(--color-text-muted);
+}
+
+.wiki-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-border);
+  margin: 1rem 0;
+  cursor: zoom-in;
+  transition: filter 150ms ease;
+}
+
+.wiki-content img:hover {
+  filter: brightness(1.15);
+}
+
+.wiki-content .spoiler {
+  margin: 1rem 0;
+  border-radius: 0.375rem;
+  overflow: hidden;
+}
+
+.wiki-content .spoiler .spoiler-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  background: rgba(120, 30, 30, 0.2);
+  border: 1px solid rgba(120, 30, 30, 0.4);
+  border-radius: 0.375rem;
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: background 150ms ease;
+}
+
+.wiki-content .spoiler .spoiler-header:hover {
+  background: rgba(120, 30, 30, 0.35);
+}
+
+.wiki-content .spoiler.collapsed .spoiler-body {
+  display: none;
+}
+
+.wiki-content .spoiler .spoiler-body {
+  padding: 0.75rem;
+  border-left: 3px solid rgba(120, 30, 30, 0.5);
+  background: rgba(120, 30, 30, 0.08);
+  margin-top: 0.25rem;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fade-in 150ms ease-out;
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateX(1rem); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.animate-toast-in {
+  animation: toast-in 200ms ease-out;
+}
+
+/* --- Landing hero atmosphere --- */
+@keyframes hero-drift {
+  from { transform: scale(1.06) translateY(0); }
+  to   { transform: scale(1.12) translateY(-2%); }
+}
+@keyframes hero-breathe {
+  0%, 100% { text-shadow: 0 0 1px rgba(0,0,0,.4), 0 6px 40px rgba(201,168,76,.20), 0 2px 3px rgba(0,0,0,.6); }
+  50%      { text-shadow: 0 0 1px rgba(0,0,0,.4), 0 6px 56px rgba(224,196,120,.44), 0 2px 3px rgba(0,0,0,.6); }
+}
+@keyframes hero-sway {
+  from { transform: translateX(-4%); }
+  to   { transform: translateX(4%); }
+}
+@keyframes scroll-bob {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(6px); }
+}
+.hero-drift   { animation: hero-drift 42s ease-in-out infinite alternate; }
+.hero-breathe { animation: hero-breathe 7s ease-in-out infinite; }
+.hero-rays    { animation: hero-sway 15s ease-in-out infinite alternate; }
+.scroll-bob   { animation: scroll-bob 2.6s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-drift, .hero-breathe, .hero-rays, .scroll-bob { animation: none; }
+}
