@@ -1,0 +1,10 @@
+{
+  "name": "Example Fantasy",
+  "description": "A tabletop RPG built on the platform shell.",
+  "tagline": "Your own game starts here",
+  "accentColor": "#4c9ac9",
+  "accentColorDim": "#34708b",
+  "displayFont": "Georgia",
+  "avatarStyle": "bottts",
+  "hero": { "eyebrow": "A New World" }
+}

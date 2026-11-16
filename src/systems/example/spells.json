@@ -1,0 +1,6 @@
+{
+  "Fighter": [],
+  "Wizard": [
+    { "name": "Firebolt", "check": "1D20 + INT, DC 8", "damage": "1d6", "arcana": 1, "weakened": null, "desc": "Hurl a bolt of fire at a target.", "gain": null, "dc": 8 }
+  ]
+}

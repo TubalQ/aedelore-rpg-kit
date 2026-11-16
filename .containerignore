@@ -1,0 +1,12 @@
+node_modules
+.next
+.env
+.env.*
+.git
+.gitignore
+mcp
+**/*.tar.gz
+Containerfile.app
+tsconfig.tsbuildinfo
+next-env.d.ts
+*.tsbuildinfo

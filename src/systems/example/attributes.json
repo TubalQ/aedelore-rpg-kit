@@ -1,0 +1,244 @@
+{
+  "attributeNames": [
+    "Strength",
+    "Dexterity",
+    "Constitution",
+    "Intelligence",
+    "Wisdom",
+    "Charisma",
+    "Focus"
+  ],
+  "attributes": {
+    "Strength": {
+      "name": "Strength",
+      "description": "Raw physical power. Determines melee damage, carrying capacity, and feats of brute force.",
+      "minValue": 0,
+      "maxValue": 3,
+      "skills": [
+        "Athletics",
+        "Might",
+        "Unarmed"
+      ]
+    },
+    "Dexterity": {
+      "name": "Dexterity",
+      "description": "Agility and reflexes. Affects ranged attacks, evasion, and fine motor tasks.",
+      "minValue": 0,
+      "maxValue": 3,
+      "skills": [
+        "Endurance",
+        "Acrobatics",
+        "Sleight of Hand",
+        "Stealth"
+      ]
+    },
+    "Constitution": {
+      "name": "Constitution",
+      "description": "Physical resilience. Governs hit points, poison resistance, and staying power under injury.",
+      "minValue": 0,
+      "maxValue": 3,
+      "skills": [
+        "Grit",
+        "Resistance"
+      ]
+    },
+    "Intelligence": {
+      "name": "Intelligence",
+      "description": "Mental acuity and knowledge. Key for spellcasting, lore, and analytical reasoning.",
+      "minValue": 0,
+      "maxValue": 3,
+      "skills": [
+        "Arcana",
+        "History",
+        "Investigation",
+        "Nature",
+        "Religion"
+      ]
+    },
+    "Wisdom": {
+      "name": "Wisdom",
+      "description": "Awareness and intuition. Affects perception, healing, and reading situations.",
+      "minValue": 0,
+      "maxValue": 3,
+      "skills": [
+        "Luck",
+        "Animal Handling",
+        "Insight",
+        "Medicine",
+        "Perception",
+        "Survival"
+      ]
+    },
+    "Charisma": {
+      "name": "Charisma",
+      "description": "Strength of personality. Governs social influence, mental fortitude, and willpower.",
+      "minValue": 0,
+      "maxValue": 3,
+      "skills": [
+        "Deception",
+        "Intimidation",
+        "Performance",
+        "Persuasion"
+      ]
+    },
+    "Focus": {
+      "name": "Focus",
+      "description": "An example of a separate 'special' attribute with no skills of its own, capped independently of the six core stats. Repurpose it for whatever your setting needs - magical attunement, initiative, sanity, luck - or remove it if six attributes are enough.",
+      "minValue": 0,
+      "maxValue": 3,
+      "skills": []
+    }
+  },
+  "skillNames": [
+    "Athletics",
+    "Might",
+    "Unarmed",
+    "Endurance",
+    "Acrobatics",
+    "Sleight of Hand",
+    "Stealth",
+    "Grit",
+    "Resistance",
+    "Arcana",
+    "History",
+    "Investigation",
+    "Nature",
+    "Religion",
+    "Luck",
+    "Animal Handling",
+    "Insight",
+    "Medicine",
+    "Perception",
+    "Survival",
+    "Deception",
+    "Intimidation",
+    "Performance",
+    "Persuasion"
+  ],
+  "skills": {
+    "Athletics": {
+      "name": "Athletics",
+      "attribute": "Strength",
+      "description": "Climbing, jumping, swimming, and other physical feats of endurance and coordination."
+    },
+    "Might": {
+      "name": "Might",
+      "attribute": "Strength",
+      "description": "Brute force for breaking objects, grappling, and overpowering opponents."
+    },
+    "Unarmed": {
+      "name": "Unarmed",
+      "attribute": "Strength",
+      "description": "Fighting without weapons. Determines punch damage and grapple effectiveness."
+    },
+    "Endurance": {
+      "name": "Endurance",
+      "attribute": "Dexterity",
+      "description": "Stamina for sustained physical activity, long marches, and resisting exhaustion."
+    },
+    "Acrobatics": {
+      "name": "Acrobatics",
+      "attribute": "Dexterity",
+      "description": "Balance, tumbling, and nimble maneuvers in and out of combat."
+    },
+    "Sleight of Hand": {
+      "name": "Sleight of Hand",
+      "attribute": "Dexterity",
+      "description": "Pickpocketing, lockpicking, and subtle manual tricks."
+    },
+    "Stealth": {
+      "name": "Stealth",
+      "attribute": "Dexterity",
+      "description": "Moving silently and staying hidden from enemies."
+    },
+    "Grit": {
+      "name": "Grit",
+      "attribute": "Constitution",
+      "description": "Extra resilience when wounded. Provides a combat bonus when your HP is low."
+    },
+    "Resistance": {
+      "name": "Resistance",
+      "attribute": "Constitution",
+      "description": "Resistance to poison, disease, and environmental hazards."
+    },
+    "Arcana": {
+      "name": "Arcana",
+      "attribute": "Intelligence",
+      "description": "Knowledge of magical theory, spells, enchantments, and arcane lore."
+    },
+    "History": {
+      "name": "History",
+      "attribute": "Intelligence",
+      "description": "Recall of historical events, lineages, and ancient civilizations."
+    },
+    "Investigation": {
+      "name": "Investigation",
+      "attribute": "Intelligence",
+      "description": "Searching for clues, deducing conclusions, and solving puzzles."
+    },
+    "Nature": {
+      "name": "Nature",
+      "attribute": "Intelligence",
+      "description": "Knowledge of plants, animals, terrain, and natural phenomena."
+    },
+    "Religion": {
+      "name": "Religion",
+      "attribute": "Intelligence",
+      "description": "Understanding of deities, rites, religious symbols, and divine lore."
+    },
+    "Luck": {
+      "name": "Luck",
+      "attribute": "Wisdom",
+      "description": "Chance-based fortune. Influences random encounters and fortunate outcomes."
+    },
+    "Animal Handling": {
+      "name": "Animal Handling",
+      "attribute": "Wisdom",
+      "description": "Calming, training, and communicating with animals."
+    },
+    "Insight": {
+      "name": "Insight",
+      "attribute": "Wisdom",
+      "description": "Reading body language and intentions. Detects lies and hidden motives."
+    },
+    "Medicine": {
+      "name": "Medicine",
+      "attribute": "Wisdom",
+      "description": "Treating wounds, diagnosing illness, and stabilizing the dying."
+    },
+    "Perception": {
+      "name": "Perception",
+      "attribute": "Wisdom",
+      "description": "Noticing hidden details, spotting traps, and general environmental awareness."
+    },
+    "Survival": {
+      "name": "Survival",
+      "attribute": "Wisdom",
+      "description": "Tracking, foraging, navigating wilderness, and enduring harsh conditions."
+    },
+    "Deception": {
+      "name": "Deception",
+      "attribute": "Charisma",
+      "description": "Lying convincingly, disguising intentions, and misleading others."
+    },
+    "Intimidation": {
+      "name": "Intimidation",
+      "attribute": "Charisma",
+      "description": "Coercing through threats, physical presence, or sheer willpower."
+    },
+    "Performance": {
+      "name": "Performance",
+      "attribute": "Charisma",
+      "description": "Entertaining, acting, storytelling, and captivating an audience."
+    },
+    "Persuasion": {
+      "name": "Persuasion",
+      "attribute": "Charisma",
+      "description": "Influencing others through diplomacy, charm, and reasoned argument."
+    }
+  },
+  "freePointsTotal": 7,
+  "maxPointsPerField": 3,
+  "maxThirdEye": 3,
+  "xpPerPoint": 10
+}

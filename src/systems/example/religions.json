@@ -1,0 +1,17 @@
+{
+  "names": ["None", "The Old Faith"],
+  "data": {
+    "None": {
+      "name": "None",
+      "deity": "-",
+      "description": "No religious devotion.",
+      "bonuses": []
+    },
+    "The Old Faith": {
+      "name": "The Old Faith",
+      "deity": "The Nameless",
+      "description": "A simple ancestral creed of hearth and harvest.",
+      "bonuses": ["+1 Insight"]
+    }
+  }
+}

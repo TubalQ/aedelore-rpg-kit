@@ -1,0 +1,27 @@
+{
+  "name": "aedelore-rpg-kit-mcp",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx watch src/index.ts",
+    "test": "KEYCLOAK_ISSUER=https://example.invalid KEYCLOAK_CLIENT_ID=test KEYCLOAK_CLIENT_SECRET=test LOG_LEVEL=error tsx --test \"src/**/*.test.ts\""
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.0",
+    "express": "^5.1.0",
+    "jose": "^6.2.12",
+    "pino": "^9.6.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^24.19.1",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  },
+  "allowScripts": {
+    "esbuild": false
+  }
+}

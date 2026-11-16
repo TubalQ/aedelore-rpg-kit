@@ -1,0 +1,526 @@
+@import "tailwindcss";
+
+@theme {
+  /* Default (dark-glass, lifted): backgrounds spread across a wider lightness
+     band so surfaces and borders separate instead of reading as one black field. */
+  --color-bg-base: #10101a;
+  --color-bg-surface: #191926;
+  --color-bg-elevated: #232333;
+  --color-bg-overlay: #2e2e42;
+
+  --color-text-base: #ecebe8;
+  --color-text-muted: #a8a7a4;
+  --color-text-faint: #83838a;
+
+  --color-accent-gold: #d0af52;
+  --color-accent-gold-dim: #8b7534;
+  --color-accent-purple: #8a6ccb;
+  /* Text on accent-purple; set per palette by withOnAccent (themes.ts). */
+  --color-on-accent-purple: #0b0a10;
+  --color-accent-blue: #4a90d9;
+  --color-accent-green: #4caf50;
+  --color-accent-cyan: #4dd0e1;
+  --color-accent-red: #e74c3c;
+
+  --color-border: #3a3a4a;
+  --color-border-hover: #4c4c60;
+
+  --font-display: "Crimson Text", Georgia, serif;
+  --font-body: "Inter", system-ui, sans-serif;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg-base);
+  color: var(--color-text-base);
+}
+
+::selection {
+  background-color: var(--color-accent-purple);
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-base);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-hover);
+}
+
+/* Lore reads like a tome: serif body (Crimson Text), a comfortable measure.
+   Ink follows the theme token so it stays legible on light (Vellum) too - a
+   hardcoded light grey vanished on parchment. */
+.wiki-content {
+  max-width: 68ch;
+  font-family: var(--font-display);
+  font-size: 1.18rem;
+  line-height: 1.8;
+  color: var(--color-text-base);
+}
+
+.wiki-content h2 {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  color: var(--color-text-base);
+  margin-top: 2.25rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.5rem;
+}
+
+.wiki-content h3 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: var(--color-text-base);
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.wiki-content p {
+  color: inherit;
+  line-height: 1.8;
+  margin-bottom: 1.15rem;
+}
+
+/* Lead-in: the opening paragraph gets a touch more presence. */
+.wiki-content > p:first-of-type {
+  font-size: 1.24rem;
+  color: var(--color-text-base);
+}
+
+.wiki-content strong {
+  color: var(--color-text-base);
+}
+
+.wiki-content a {
+  color: var(--color-accent-gold);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.wiki-content a:hover {
+  color: var(--color-accent-gold-dim);
+}
+
+.wiki-content ul, .wiki-content ol {
+  color: inherit;
+  padding-left: 1.5rem;
+  margin-bottom: 1.15rem;
+}
+
+.wiki-content li {
+  margin-bottom: 0.25rem;
+}
+
+.wiki-content hr {
+  border-color: var(--color-border);
+  margin: 1.5rem 0;
+}
+
+.wiki-content blockquote {
+  border-left: 3px solid var(--color-accent-gold-dim);
+  padding-left: 1rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin: 1rem 0;
+}
+
+.wiki-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  /* Redaktörer kan skapa godtyckligt breda tabeller (statblocks m.m.) -
+     scrolla tabellen i sig i stället för att tvinga sid-scroll på mobil. */
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.wiki-content th, .wiki-content td {
+  border: 1px solid var(--color-border);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  /* Tables (statblocks, data) stay in the UI sans for tight legibility. */
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+}
+
+.wiki-content th {
+  background: var(--color-bg-elevated);
+  color: var(--color-text-base);
+}
+
+.wiki-content td {
+  color: var(--color-text-muted);
+}
+
+/* The editor keeps the text of a table cell or list item in a paragraph.
+   A lone one must look like bare text there, as in pages written before
+   (see src/lib/wiki/round-trip.ts). */
+.wiki-content td > p:only-child,
+.wiki-content th > p:only-child,
+.wiki-content li > p {
+  margin-bottom: 0;
+}
+
+/* Bold link text is gold whichever way it is nested (<strong><a> or
+   <a><strong>): the editor writes <strong> outside. */
+.wiki-content a strong {
+  color: inherit;
+}
+
+.wiki-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-border);
+  margin: 1rem 0;
+  cursor: zoom-in;
+  transition: filter 150ms ease;
+}
+
+.wiki-content img:hover {
+  filter: brightness(1.15);
+}
+
+.wiki-content .spoiler {
+  margin: 1rem 0;
+  border-radius: 0.375rem;
+  overflow: hidden;
+}
+
+.wiki-content .spoiler .spoiler-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  background: rgba(120, 30, 30, 0.2);
+  border: 1px solid rgba(120, 30, 30, 0.4);
+  border-radius: 0.375rem;
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: background 150ms ease;
+}
+
+.wiki-content .spoiler .spoiler-header:hover {
+  background: rgba(120, 30, 30, 0.35);
+}
+
+.wiki-content .spoiler.collapsed .spoiler-body {
+  display: none;
+}
+
+.wiki-content .spoiler .spoiler-body {
+  padding: 0.75rem;
+  border-left: 3px solid rgba(120, 30, 30, 0.5);
+  background: rgba(120, 30, 30, 0.08);
+  margin-top: 0.25rem;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fade-in 150ms ease-out;
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateX(1rem); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.animate-toast-in {
+  animation: toast-in 200ms ease-out;
+}
+
+/* --- Landing hero atmosphere --- */
+@keyframes hero-drift {
+  from { transform: scale(1.06) translateY(0); }
+  to   { transform: scale(1.12) translateY(-2%); }
+}
+@keyframes hero-breathe {
+  0%, 100% { text-shadow: 0 0 1px rgba(0,0,0,.4), 0 6px 40px rgba(201,168,76,.20), 0 2px 3px rgba(0,0,0,.6); }
+  50%      { text-shadow: 0 0 1px rgba(0,0,0,.4), 0 6px 56px rgba(224,196,120,.44), 0 2px 3px rgba(0,0,0,.6); }
+}
+@keyframes hero-sway {
+  from { transform: translateX(-4%); }
+  to   { transform: translateX(4%); }
+}
+@keyframes scroll-bob {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(6px); }
+}
+.hero-drift   { animation: hero-drift 42s ease-in-out infinite alternate; }
+.hero-breathe { animation: hero-breathe 7s ease-in-out infinite; }
+.hero-rays    { animation: hero-sway 15s ease-in-out infinite alternate; }
+.scroll-bob   { animation: scroll-bob 2.6s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-drift, .hero-breathe, .hero-rays, .scroll-bob { animation: none; }
+}
+
+/* ============================================================================
+   Character sheet: "classic ledger" look[0-9]+)#48).
+   Scoped to `.sheet-classic` so the palette/type swap never leaks into the rest
+   of the app. Overriding the Tailwind @theme tokens here means the existing
+   section components inherit the new palette without per-element restyling.
+   ========================================================================== */
+.sheet-classic {
+  /* Inherit the app palette (no colour-token overrides) so the sheet blends with
+     the rest of Aedelore and follows the active theme. Only the sheet-specific
+     hairline + semantic colours are defined, mapped onto the app's own accents. */
+  --cs-gold-rule: var(--color-accent-gold-dim);
+  --cs-gold-bright: var(--color-accent-gold);
+  --cs-fainter: var(--color-text-faint);
+  --cs-line-soft: var(--color-border);
+  --cs-line-softer: var(--color-border);
+  --cs-hp: var(--color-accent-green);
+  --cs-arcana: var(--color-accent-purple);
+  --cs-will: var(--color-accent-blue);
+  --cs-danger: var(--color-accent-red);
+  --cs-ok: var(--color-accent-green);
+  /* Same faces as the rest of Aedelore: app body font (Inter) + active theme
+     display font (Crimson Text on the default theme) for labels and numbers. */
+  --font-heading: var(--font-display);
+  --font-serif: var(--font-body);
+  font-family: var(--font-body);
+  color: var(--color-text-base);
+}
+
+/* framed sheet: a quiet dim-gold ledger frame that reads with the app, not over it */
+.cs-sheet {
+  background: var(--color-bg-surface);
+  border-top: 3px double var(--cs-gold-rule);
+  border-bottom: 3px double var(--cs-gold-rule);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+/* identity header */
+.cs-eyebrow { font-family: var(--font-heading); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--color-text-faint); font-variant-numeric: tabular-nums; }
+.cs-name { font-family: var(--font-heading); font-weight: 300; line-height: 1; letter-spacing: 0.02em; color: var(--color-text-base); font-size: clamp(34px, 11vw, 46px); overflow-wrap: anywhere; min-width: 0; }
+.cs-kind { font-family: var(--font-heading); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--color-text-faint); }
+.cs-rule { height: 1px; background: var(--cs-gold-rule); }
+
+/* section rule-head: hairline — CAPS — hairline (or a right-side control) */
+.cs-rulehead { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; }
+.cs-rulehead > .hr { height: 1px; background: var(--color-border); }
+.cs-rulehead > .lbl { font-family: var(--font-heading); font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--color-accent-gold); white-space: nowrap; }
+.cs-rulehead > .lbl .n { color: var(--color-text-faint); font-size: 10px; }
+.cs-rulehead > .r { justify-self: end; }
+
+/* borderless section on the shared sheet surface */
+.cs-section { border: none; background: transparent; padding: 0; }
+
+/* pip bars (vitals) */
+.cs-pips { display: flex; gap: 3px; }
+.cs-pip { flex: 1 1 0; height: 14px; border: 1px solid var(--color-border); background: transparent; }
+.cs-pip.on { }
+
+/* stepper buttons */
+.cs-step { width: 26px; height: 26px; border: 1px solid var(--color-border); background: transparent; color: var(--color-text-base); font-family: var(--font-heading); font-size: 16px; line-height: 1; display: inline-flex; align-items: center; justify-content: center; }
+.cs-step:hover { border-color: var(--cs-gold-rule); color: var(--cs-gold-bright); }
+.cs-mini-step { width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; line-height: 1; }
+/* Touch screens at the game table: steppers get finger-sized hit areas. */
+@media (pointer: coarse) {
+  .cs-step { width: 40px; height: 40px; }
+  .cs-mini-step { width: 36px; height: 36px; }
+}
+
+/* tabs */
+.cs-tabs { display: flex; justify-content: center; gap: 22px; border-top: 1px solid var(--cs-line-soft); padding-top: 4px; }
+.cs-tab { padding: 11px 6px 9px; border: none; border-bottom: 2px solid transparent; background: none; color: var(--color-text-faint); font-family: var(--font-heading); font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase; cursor: pointer; }
+.cs-tab[aria-selected="true"] { color: var(--cs-gold-bright); border-bottom-color: var(--cs-gold-rule); }
+
+/* stat box (AC / worthiness / XP) */
+.cs-statbox { border: 1px solid var(--color-border); }
+.cs-statbox .row { display: flex; justify-content: space-between; align-items: baseline; padding: 10px 14px; border-bottom: 1px solid var(--cs-line-soft); }
+.cs-statbox .row:last-child { border-bottom: none; }
+.cs-statbox .k { font-family: var(--font-heading); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-text-faint); }
+.cs-statbox .v { font-family: var(--font-heading); font-size: 28px; line-height: 1; color: var(--color-text-base); font-variant-numeric: tabular-nums; }
+.cs-statbox .v.gold { color: var(--color-accent-gold); font-size: 22px; }
+
+/* numeric display helper */
+.cs-num { font-family: var(--font-heading); font-variant-numeric: tabular-nums; }
+
+/* Reskin the existing section components in place: strip the card chrome so they
+   read as parts of one sheet, and turn every section <h2> into a gold capital
+   label. Higher specificity than Tailwind's single-class utilities, so this wins
+   without touching the section files. Direct-child headers also get the
+   hairline-flanked rule-head treatment. */
+.sheet-classic section { border: none; background: transparent; padding: 0; }
+.sheet-classic section h2 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--color-accent-gold);
+}
+.sheet-classic section > h2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.sheet-classic section > h2::before,
+.sheet-classic section > h2::after {
+  content: "";
+  flex: 1 1 0;
+  height: 1px;
+  background: var(--color-border);
+}
+/* sub-headers (weapons / armor / shield etc.) stay quiet, not gold rules */
+.sheet-classic section h3 {
+  font-family: var(--font-heading);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 11px;
+  color: var(--color-text-faint);
+}
+
+/* ============================================================================
+   Wiki: books that look like books[0-9]+)#52).
+   Each book is a stood-up tome: bound spine with raised bands, leather cover
+   with grain + stamped gold title (or a cover image), and a fore-edge paper
+   block. Book colours (--lh/--ll leather, --lg gold) are fixed per book via the
+   .wb-* classes and are independent of the site theme, like real spines.
+   ========================================================================== */
+.wiki-shelf { perspective: 1600px; }
+
+.wikibook { display: block; position: relative; padding-bottom: 14px; text-decoration: none; }
+.wikibook::after {
+  content: ""; position: absolute; left: 12%; right: 6%; bottom: 0; height: 15px;
+  background: radial-gradient(50% 60% at 50% 50%, rgba(0,0,0,.55), transparent 72%);
+  filter: blur(2px); transition: opacity .35s, transform .35s; z-index: 0;
+}
+.wikibook:hover::after { transform: translateY(6px) scaleX(.9); opacity: .7; }
+
+/* MUST be display:block - these are <span>s (inline), and inline boxes ignore
+   width/height/padding-bottom, so the ratio would collapse to zero height. */
+.wikibook__block {
+  display: block; position: relative; width: 100%; height: 0; padding-bottom: 132%;
+  transform-style: preserve-3d; transform: rotateY(-11deg); transform-origin: left center;
+  transition: transform .45s cubic-bezier(.2,.7,.2,1);
+}
+.wikibook:hover .wikibook__block,
+.wikibook:focus-visible .wikibook__block { transform: rotateY(-4deg) translateY(-7px); }
+
+.wikibook__pages {
+  position: absolute; top: 2px; bottom: -5px; right: -7px; left: 10px; z-index: 0;
+  border-radius: 1px 3px 3px 1px;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.25), transparent 12%),
+    repeating-linear-gradient(90deg, #efe7d0 0 1.2px, #dccfae 1.2px 2.4px);
+  box-shadow: 0 2px 3px rgba(0,0,0,.35);
+}
+.wikibook__pages::after {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px;
+  background: linear-gradient(#e9cf86, #b9973f); opacity: .85;
+}
+
+.wikibook__cover {
+  position: absolute; inset: 0; z-index: 2; overflow: hidden; border-radius: 2px 8px 8px 2px;
+  box-shadow:
+    inset 0 0 34px rgba(0,0,0,.5), inset -2px 0 8px rgba(0,0,0,.32),
+    inset 0 1px 0 rgba(255,255,255,.08), 0 3px 6px rgba(0,0,0,.5);
+  background:
+    radial-gradient(130% 90% at 30% 6%, rgba(255,255,255,.12), transparent 55%),
+    linear-gradient(158deg, var(--lh, #453052), var(--ll, #221334));
+}
+.wikibook__cover::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 150px; mix-blend-mode: soft-light; opacity: .55;
+}
+.wikibook__cover::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(115deg, transparent 38%, rgba(255,255,255,.12) 48%, transparent 56%);
+}
+
+.wikibook__art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+
+.wikibook__spine {
+  position: absolute; left: 0; top: 0; bottom: 0; width: 17px; z-index: 4;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.18) 42%, rgba(255,255,255,.09) 52%, rgba(0,0,0,.3) 100%),
+    repeating-linear-gradient(180deg, transparent 0 21px, rgba(0,0,0,.36) 21px 23px, rgba(255,255,255,.15) 23px 25px, transparent 25px 30px);
+}
+.wikibook__spine::after {
+  content: ""; position: absolute; right: -1px; top: 8px; bottom: 8px; width: 1px;
+  background: var(--lg, #e8c98f); opacity: .5;
+}
+
+.wikibook__frame {
+  position: absolute; inset: 12px 12px 12px 25px; z-index: 3;
+  border: 1.5px solid var(--lg, #e8c98f); opacity: .5; border-radius: 2px;
+}
+.wikibook__frame::before { content: ""; position: absolute; inset: 3px; border: .5px solid var(--lg, #e8c98f); opacity: .7; }
+
+.wikibook__inner {
+  position: absolute; inset: 12px 12px 12px 25px; z-index: 5;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 8px 6px;
+}
+.wikibook__orn { color: var(--lg, #e8c98f); opacity: .75; font-size: 12px; line-height: 1; text-shadow: 0 1px 0 rgba(0,0,0,.5); }
+.wikibook__title {
+  font-family: var(--font-display); color: var(--lg, #e8c98f); text-align: center;
+  font-size: clamp(12px, 2.4vw, 17px); line-height: 1.15; letter-spacing: .02em;
+  text-shadow: 0 1px 0 rgba(0,0,0,.6), 0 -1px 0 rgba(255,255,255,.1);
+}
+
+.wikibook__cap {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 5; padding: 34px 12px 13px 26px;
+  background: linear-gradient(to top, rgba(0,0,0,.9), rgba(0,0,0,.22) 66%, transparent);
+}
+.wikibook__cap-title {
+  font-family: var(--font-display); color: #f2e8ca; font-size: clamp(12px, 2.3vw, 16px);
+  line-height: 1.14; text-shadow: 0 1px 3px rgba(0,0,0,.8);
+}
+
+/* per-book leather colours - a real shelf isn't one colour */
+.wb-ox  { --lh: #6a2634; --ll: #3a121b; --lg: #f0cf94; }
+.wb-for { --lh: #28492f; --ll: #122619; --lg: #e6d59a; }
+.wb-nav { --lh: #28385a; --ll: #111d33; --lg: #dcc98d; }
+.wb-aub { --lh: #453052; --ll: #221334; --lg: #e8c98f; }
+.wb-tan { --lh: #7a5430; --ll: #402815; --lg: #f7e3ad; }
+.wb-sla { --lh: #33414c; --ll: #19222b; --lg: #d3c79a; }
+
+@media (prefers-reduced-motion: reduce) { .wikibook__block { transition: none; } }
+
+/* Keyboard focus. Many controls use focus:outline-none for their mouse styling;
+   :focus-visible (keyboard) must still show where focus is (WCAG 2.4.7). */
+:is(a, button, summary, select, [role="button"], [role="tab"], [tabindex]):focus-visible {
+  outline: 2px solid var(--color-accent-gold) !important;
+  outline-offset: 2px;
+}
+
+/* #89: gold text with opacity falls under 4.5:1 on a light palette (Vellum:
+   2.6-4.25:1). There these classes use the solid gold, which the palette
+   already sets to pass; dark palettes keep the translucent look. data-scheme
+   is set with data-theme (theme-script.tsx, theme-store.ts). */
+:root[data-scheme="light"] .text-accent-gold\/60,
+:root[data-scheme="light"] .text-accent-gold\/70,
+:root[data-scheme="light"] .text-accent-gold\/75,
+:root[data-scheme="light"] .text-accent-gold\/80,
+:root[data-scheme="light"] .hover\:text-accent-gold\/80:hover {
+  color: var(--color-accent-gold);
+}
+
